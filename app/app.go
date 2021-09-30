@@ -1,4 +1,4 @@
-package devops
+package app
 
 import (
     "encoding/json"

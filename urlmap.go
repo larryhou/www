@@ -5,8 +5,8 @@ import (
     "encoding/binary"
     "encoding/json"
     "fmt"
+    "github.com/larryhou/urlmap/app"
     "github.com/larryhou/urlmap/database"
-    "github.com/larryhou/urlmap/devops"
     "github.com/larryhou/urlmap/model"
     "io/ioutil"
     "log"
@@ -83,7 +83,7 @@ func (c *Client) Handle(w http.ResponseWriter, r *http.Request) {
 
 func (c *Client) Listen(port int16) {
     mux := http.NewServeMux()
-    mux.Handle("/url/devops/", Handle(devops.Handle))
+    mux.Handle("/url/app/", Handle(app.Handle))
     mux.Handle("/url/", Handle(Url{}.Handle))
     mux.Handle("/urlmap", Handle(c.Handle))
     mux.Handle("/", Handle(func(w http.ResponseWriter, r *http.Request) {
