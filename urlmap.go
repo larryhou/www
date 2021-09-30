@@ -11,6 +11,7 @@ import (
     "io/ioutil"
     "log"
     "net/http"
+    "strings"
     "time"
     "unsafe"
 )
@@ -21,6 +22,17 @@ func (f Handle) ServeHTTP(w http.ResponseWriter, r *http.Request)  {
     w.Header().Set("#-Author", "larryhou")
     w.Header().Set("#-Engine", "urlmap")
     f(w, r)
+}
+
+type Url struct {}
+func (u Url) Handle(w http.ResponseWriter, r *http.Request) {
+    parts := strings.Split(r.URL.Path, "/")
+    id := parts[len(parts)-1]
+    m := &model.Mapping{}
+    if _, err := database.Query(`SELECT * FROM urlmap WHERE id=?`, m, id); err == nil {
+        w.Header().Set("Location", m.Url)
+        w.WriteHeader(http.StatusFound)
+    }
 }
 
 type Response struct {
@@ -72,6 +84,7 @@ func (c *Client) Handle(w http.ResponseWriter, r *http.Request) {
 func (c *Client) Listen(port int16) {
     mux := http.NewServeMux()
     mux.Handle("/url/devops/", Handle(devops.Handle))
+    mux.Handle("/url/", Handle(Url{}.Handle))
     mux.Handle("/urlmap", Handle(c.Handle))
     mux.Handle("/", Handle(func(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusInternalServerError)
