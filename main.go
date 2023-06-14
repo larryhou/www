@@ -26,6 +26,7 @@ func main() {
     }
 
     mux := http.NewServeMux()
+    mux.Handle(`/static/`, svr.FileHandle(`./static`))
     mux.Handle(`/url` , svr.Handle(urlmap.Handle))
     mux.Handle(`/url/`, svr.Handle(urlmap.Handle))
     mux.Handle("/", svr.Handle(func(w http.ResponseWriter, r *http.Request) {
