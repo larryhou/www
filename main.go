@@ -3,9 +3,9 @@ package main
 import (
     "flag"
     "fmt"
-    "github.com/larryhou/urlmap/api/module/urlmap"
-    "github.com/larryhou/urlmap/api/util/db"
-    "github.com/larryhou/urlmap/api/util/svr"
+    "github.com/larryhou/www/api/module/urlmap"
+    "github.com/larryhou/www/api/util/db"
+    "github.com/larryhou/www/api/util/svr"
     "log"
     "net/http"
     "os"

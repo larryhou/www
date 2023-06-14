@@ -1,4 +1,4 @@
-module github.com/larryhou/urlmap
+module github.com/larryhou/www
 
 go 1.15
 
