@@ -44,7 +44,7 @@ type Response interface {
 type Handle func(w http.ResponseWriter, r *http.Request)
 func (x Handle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     id, _ := uuid.NewUUID()
-    log.Printf("%v %v %v #%v %v %+v %s\n", r.Proto, r.Method, r.URL, r.ContentLength, r.Header.Get("Content-Type"), r.RemoteAddr, id)
+    log.Printf("%v %v %v #%v %+v %+v %s\n", r.Proto, r.Method, r.URL, r.ContentLength, r.Header, r.RemoteAddr, id)
     w.Header().Set("H-Engine", "rapidci")
     w.Header().Set("H-Author", "larryhou")
     w.Header().Set("H-Uuid", id.String())
