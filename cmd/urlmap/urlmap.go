@@ -15,7 +15,7 @@ func main() {
 		http.Redirect(w, r, fmt.Sprintf(`https://rapidsir.com/url/%s`, path.Base(r.URL.Path)), http.StatusMovedPermanently)
 	}))
 	mux.Handle(`/urlmap/`, svr.Handle(func(w http.ResponseWriter, r *http.Request) {
-		util.Request(nil, `https://rapidsir.com/url`, nil, util.Attachment{
+		util.Request(nil, `https://rapidsir.com/url`, nil, &util.Attachment{
 			Method: http.MethodPut,
 			Data:   r.Body,
 		}, nil)

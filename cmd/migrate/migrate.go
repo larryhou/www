@@ -2,6 +2,7 @@ package main
 
 import (
     "encoding/json"
+    _ "github.com/larryhou/www/api/module/urlmap"
     "github.com/larryhou/www/api/util/db"
     "os"
     "strings"
